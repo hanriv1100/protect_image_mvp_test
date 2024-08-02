@@ -1,13 +1,12 @@
 import streamlit as st
 import cv2
 import numpy as np
-from PIL import Image
+from PIL import Image, ExifTags
 
 
-st.set_page_config(page_title="Image Processing MVP", layout="wide")
-st.title("Image Processing MVP")
-st.markdown("When you upload your image, our protective filter will be applied to ensure it is not used as training data for deepfake purposes")
-st.markdown("Please, no refresh")
+st.set_page_config(page_title="딥페이크 사전 방지 필터(테스트)", layout="wide")
+st.title("딥페이크 사전 방지 필터(테스트)")
+st.markdown("1. 이미지를 업로드하면, 사전 방지 필터를 씌운 이미지를 보여줍니다.    2. 하단의 흰 버튼을 누르면, 딥페이크 모델을 통해 생성된 결과를 보여줍니다.")
 st.markdown(
     """
     <style>
@@ -122,13 +121,31 @@ def add_noise(image):
     noisy_image = cv2.add(image_np, noise)
     return noisy_image
 
+def correct_image_orientation(image):
+    try:
+        for orientation in ExifTags.TAGS.keys():
+            if ExifTags.TAGS[orientation] == 'Orientation':
+                break
+        exif = image._getexif()
+        if exif is not None:
+            orientation = exif.get(orientation, 1)
+            if orientation == 3:
+                image = image.rotate(180, expand=True)
+            elif orientation == 6:
+                image = image.rotate(270, expand=True)
+            elif orientation == 8:
+                image = image.rotate(90, expand=True)
+    except (AttributeError, KeyError, IndexError):
+        pass
+    return image
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
+uploaded_file = st.file_uploader("이미지를 업로드하세요...", type=["jpg", "png", "jpeg"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
+    image = correct_image_orientation(image)
     
-    st.write("Processing...")
+    st.write("이미지 처리 중...")
 
     # Save the original image as a numpy array
     image_np = np.array(image)
@@ -137,30 +154,25 @@ if uploaded_file is not None:
     
     with col1:
         st.image(image, use_column_width=True)
-        st.markdown('<div class="custom-caption-1">Upload Image</div>', unsafe_allow_html=True)
+        st.markdown('<div class="custom-caption-1">업로드한 이미지</div>', unsafe_allow_html=True)
 
     with col2:
         st.image(image, use_column_width=True)
-        st.markdown('<div class="custom-caption-1">Processed Image</div>', unsafe_allow_html=True)
+        st.markdown('<div class="custom-caption-1">필터를 입힌 이미지</div>', unsafe_allow_html=True)
 
-
-
-
-    button_clicked = st.button("Put Upper Pictures into Deepfake Model")
-    st.markdown('<p class="survey">If you have used this feature or curious about our technical principles, we would appreciate it if you could respond to the survey below.</p>', unsafe_allow_html=True)
-    st.markdown('<p class="survey">We will be giving out gift cards through a monthly raffle among those who leave their contact information.</p>', unsafe_allow_html=True)
-    st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzRtuvQyp3CQDhlxEag40v2yDM7u9NYpJ2gv5kgwuNbo1gUA/viewform?usp=sf_link" target="_blank" class="a-tag">Click here! Participating in this Survey would help us!!</a></p>', unsafe_allow_html=True)
-    st.markdown('<p class="survey-2">Thank you for using our service!!</p>', unsafe_allow_html=True)
+    button_clicked = st.button("상단의 두 사진을 딥페이크 모델에 학습시키기")
+    st.markdown('<p class="survey">위 서비스를 사용해 보셨거나, 저희 기술적 원리에 관심이 있으신 분들께선 아래의 간단한 인터뷰에 참여해 주시면 진심으로 감사드리겠습니다.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzRtuvQyp3CQDhlxEag40v2yDM7u9NYpJ2gv5kgwuNbo1gUA/viewform?usp=sf_link" target="_blank" class="a-tag">인터뷰에 응해 주신다면 큰 도움이 될 것 같습니다!!</a></p>', unsafe_allow_html=True)
+    st.markdown('<p class="survey-2">서비스를 이용해 주셔서 감사합니다! 좋은 하루 보내세요!</p>', unsafe_allow_html=True)
 
     if button_clicked:
         with col1:
             processed_image = change_hair_to_blonde(image)
             st.image(processed_image, use_column_width=True)
-            st.markdown('<div class="custom-caption-2">Upload Image Deepfake Output</div>', unsafe_allow_html=True)
+            st.markdown('<div class="custom-caption-2">원본 이미지를 딥페이크 모델에 넣었을 경우</div>', unsafe_allow_html=True)
         
         with col2:
             deepfake_image = add_noise(image)
             st.image(deepfake_image, use_column_width=True)
-            st.markdown('<div class="custom-caption-2">Processed Image Deepfake Output</div>', unsafe_allow_html=True)
-            
-            
+            st.markdown('<div class="custom-caption-2">사전 방지 필터 이미지를 딥페이크 모델에 넣었을 경우</div>', unsafe_allow_html=True)
+
