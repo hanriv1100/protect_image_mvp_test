@@ -149,7 +149,7 @@ if uploaded_file is not None:
     button_clicked = st.button("Put Upper Pictures into Deepfake Model")
     st.markdown('<p class="survey">If you have used this feature or curious about our technical principles, we would appreciate it if you could respond to the survey below.</p>', unsafe_allow_html=True)
     st.markdown('<p class="survey">We will be giving out gift cards through a monthly raffle among those who leave their contact information.</p>', unsafe_allow_html=True)
-    st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzRtuvQyp3CQDhlxEag40v2yDM7u9NYpJ2gv5kgwuNbo1gUA/viewform?usp=sf_link" target="_blank" class="a-tag">Participate in this Survey would help us!!</a></p>', unsafe_allow_html=True)
+    st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzRtuvQyp3CQDhlxEag40v2yDM7u9NYpJ2gv5kgwuNbo1gUA/viewform?usp=sf_link" target="_blank" class="a-tag">Click here! Participating in this Survey would help us!!</a></p>', unsafe_allow_html=True)
     st.markdown('<p class="survey-2">Thank you for using our service!!</p>', unsafe_allow_html=True)
 
     if button_clicked:
