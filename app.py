@@ -162,7 +162,7 @@ if uploaded_file is not None:
 
     button_clicked = st.button("상단의 두 사진을 딥페이크 모델에 학습시키기")
     st.markdown('<p class="survey">위 서비스를 사용해 보셨거나, 저희 기술적 원리에 관심이 있으신 분들께선 아래의 간단한 인터뷰에 참여해 주시면 진심으로 감사드리겠습니다.</p>', unsafe_allow_html=True)
-    st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzRtuvQyp3CQDhlxEag40v2yDM7u9NYpJ2gv5kgwuNbo1gUA/viewform?usp=sf_link" target="_blank" class="a-tag">인터뷰에 응해 주신다면 큰 도움이 될 것 같습니다!!</a></p>', unsafe_allow_html=True)
+    st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzRtuvQyp3CQDhlxEag40v2yDM7u9NYpJ2gv5kgwuNbo1gUA/viewform?usp=sf_link" target="_blank" class="a-tag">여기를 클릭하여 인터뷰에 응해 주신다면 큰 도움이 될 것 같습니다!!</a></p>', unsafe_allow_html=True)
     st.markdown('<p class="survey-2">서비스를 이용해 주셔서 감사합니다! 좋은 하루 보내세요!</p>', unsafe_allow_html=True)
 
     if button_clicked:
