@@ -7,15 +7,15 @@ from PIL import Image, ExifTags
 # 가장 먼저 set_page_config() 호출
 st.set_page_config(page_title="딥페이크 사전 방지 필터(테스트)", layout="wide")
 
-# Google Analytics 코드 삽입 (G-1234567890를 실제 Google Analytics 추적 ID로 교체)
+
 ga_code = """
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1234567890"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PZPBGNENQG"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-1234567890');
+  gtag('config', 'G-PZPBGNENQG');
 </script>
 """
 
