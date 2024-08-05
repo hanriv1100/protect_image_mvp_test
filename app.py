@@ -19,14 +19,62 @@ ga_code = """
 </script>
 """
 
+import streamlit as st
+import requests
+import uuid
+
+# Google Analytics Measurement Protocol 설정
+GA_TRACKING_ID = 'G-PZPBGNENQG'
+CLIENT_ID = str(uuid.uuid4())  # 고유한 클라이언트 ID 생성
+
+def send_event_to_ga(category, action, label=None, value=0):
+    payload = {
+        'v': '1',  # API 버전
+        'tid': GA_TRACKING_ID,  # 추적 ID
+        'cid': CLIENT_ID,  # 클라이언트 ID
+        't': 'event',  # 이벤트 유형
+        'ec': category,  # 이벤트 카테고리
+        'ea': action,  # 이벤트 액션
+        'el': label,  # 이벤트 라벨 (선택 사항)
+        'ev': value  # 이벤트 값 (선택 사항)
+    }
+    response = requests.post('https://www.google-analytics.com/collect', data=payload)
+    return response.status_code
+
+# Streamlit 앱 구성
+st.title('Google Analytics와 연동된 Streamlit 앱')
+
+if st.button('이벤트 전송'):
+    status_code = send_event_to_ga('button', 'click', 'send_event_button')
+    if status_code == 200:
+        st.success('이벤트가 성공적으로 전송되었습니다!')
+    else:
+        st.error('이벤트 전송에 실패했습니다.')
+
+# 다른 사용자 활동 추적 예제
+st.text_input('사용자 입력', on_change=lambda: send_event_to_ga('input', 'change', 'user_input'))
+
+
+
+
+
 # Streamlit에 GA 코드 삽입
 components.html(ga_code, height=0)
 
 # 나머지 Streamlit 코드
 st.title("딥페이크 사전 방지 필터(테스트)")
-st.markdown("1. 이미지를 업로드하면, 사전 방지 필터를 씌운 이미지를 보여줍니다.    2. 하단의 흰 버튼을 누르면, 딥페이크 모델을 통해 생성된 결과를 보여줍니다.")
+st.markdown("")
+st.markdown("<span style='font-size: 18px;'>안녕하세요! 저희는 딥페이크로부터 여러분의 사진을 보호하는 솔루션을 개발하고 있습니다.</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size: 18px;'>저희의 목표는 온라인에 게시된 개인의 사진이 악성 딥페이크 영상에 사용되지 않도록 하는 것입니다. 현재는 개발을 마무리하고 서비스화 하기 전, 여러분의 의견을 듣기 위해 간단한 테스트를 진행하고 있습니다.</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size: 18px;'>최근 SNS에 업로드된 이미지가 딥페이크 포르노물에 악용되는 사례가 매일 보고되고 있습니다. 따라서 해결책을 강구하기 위해, 여러분의 소중한 의견이 필요합니다.</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size: 18px;'>아래 링크를 통해 저희 서비스를 이용해 보신 후, 인터뷰에 참여해 주시면 큰 도움이 되겠습니다. 여러분의 피드백은 서비스 개선에 귀중한 자료가 될 것입니다.</span>", unsafe_allow_html=True)
+st.markdown("")
+st.markdown("<span style='font-size: 18px;'>동작 원리 : 1. 이미지를 업로드하면, 사전 방지 필터가 적용된 이미지를 보여드립니다.   2. 하단의 흰 버튼을 클릭하면 딥페이크 모델을 통해 생성된 결과를 확인할 수 있습니다.</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size: 18px;'>여러분의 참여에 감사드립니다!</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size: 14px;'> *사전 방지 필터란: 여러분의 사진이 딥페이크 모델에 학습되지 못하도록 방해하는 노이즈(noise)형태의 필터.</span>", unsafe_allow_html=True)
 st.markdown(
     """
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
     .stFileUploader label {
         font-size: 20px;
@@ -187,8 +235,10 @@ if uploaded_file is not None:
             processed_image = change_hair_to_blonde(image)
             st.image(processed_image, use_column_width=True)
             st.markdown('<div class="custom-caption-2">원본 이미지를 딥페이크 모델에 넣었을 경우</div>', unsafe_allow_html=True)
+            st.markdown("<span>이해를 돕기 위해 사진에 노란색을 입히는 딥페이크 알고리즘 적용. 원본 이미지는 딥페이크 알고리즘의 영향을 받음.</span>", unsafe_allow_html=True)
         
         with col2:
             deepfake_image = add_noise(image)
             st.image(deepfake_image, use_column_width=True)
             st.markdown('<div class="custom-caption-2">사전 방지 필터 이미지를 딥페이크 모델에 넣었을 경우</div>', unsafe_allow_html=True)
+            st.markdown("<span>사전 방지 필터를 입힌 이미지는 딥페이크 알고리즘의 영향을 받지 않고 노이즈 처리가 되어 알아보기 힘든 사진을 출력. 즉, 딥페이크 사진 합성을 방해함.</span>", unsafe_allow_html=True)
