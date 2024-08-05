@@ -19,45 +19,6 @@ ga_code = """
 </script>
 """
 
-import streamlit as st
-import requests
-import uuid
-
-# Google Analytics Measurement Protocol 설정
-GA_TRACKING_ID = 'G-PZPBGNENQG'
-CLIENT_ID = str(uuid.uuid4())  # 고유한 클라이언트 ID 생성
-
-def send_event_to_ga(category, action, label=None, value=0):
-    payload = {
-        'v': '1',  # API 버전
-        'tid': GA_TRACKING_ID,  # 추적 ID
-        'cid': CLIENT_ID,  # 클라이언트 ID
-        't': 'event',  # 이벤트 유형
-        'ec': category,  # 이벤트 카테고리
-        'ea': action,  # 이벤트 액션
-        'el': label,  # 이벤트 라벨 (선택 사항)
-        'ev': value  # 이벤트 값 (선택 사항)
-    }
-    response = requests.post('https://www.google-analytics.com/collect', data=payload)
-    return response.status_code
-
-# Streamlit 앱 구성
-st.title('Google Analytics와 연동된 Streamlit 앱')
-
-if st.button('이벤트 전송'):
-    status_code = send_event_to_ga('button', 'click', 'send_event_button')
-    if status_code == 200:
-        st.success('이벤트가 성공적으로 전송되었습니다!')
-    else:
-        st.error('이벤트 전송에 실패했습니다.')
-
-# 다른 사용자 활동 추적 예제
-st.text_input('사용자 입력', on_change=lambda: send_event_to_ga('input', 'change', 'user_input'))
-
-
-
-
-
 # Streamlit에 GA 코드 삽입
 components.html(ga_code, height=0)
 
