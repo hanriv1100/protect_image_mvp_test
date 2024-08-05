@@ -5,8 +5,26 @@ from PIL import Image, ExifTags
 import streamlit as st
 import streamlit.components.v1 as components
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 
 st.set_page_config(page_title="딥페이크 사전 방지 필터(테스트)", layout="wide")
+
+ga_code = """
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1234567890"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PZPBGNENQG');
+</script>
+"""
+
+# Streamlit에 GA 코드 삽입
+components.html(ga_code, height=0)
+
 st.title("딥페이크 사전 방지 필터(테스트)")
 st.markdown("1. 이미지를 업로드하면, 사전 방지 필터를 씌운 이미지를 보여줍니다.    2. 하단의 흰 버튼을 누르면, 딥페이크 모델을 통해 생성된 결과를 보여줍니다.")
 st.markdown(
@@ -177,4 +195,3 @@ if uploaded_file is not None:
             deepfake_image = add_noise(image)
             st.image(deepfake_image, use_column_width=True)
             st.markdown('<div class="custom-caption-2">사전 방지 필터 이미지를 딥페이크 모델에 넣었을 경우</div>', unsafe_allow_html=True)
-
