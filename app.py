@@ -1,16 +1,13 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import cv2
 import numpy as np
 from PIL import Image, ExifTags
-import streamlit as st
-import streamlit.components.v1 as components
 
-import streamlit as st
-import streamlit.components.v1 as components
-
-
+# 가장 먼저 set_page_config() 호출
 st.set_page_config(page_title="딥페이크 사전 방지 필터(테스트)", layout="wide")
 
+# Google Analytics 코드 삽입 (G-1234567890를 실제 Google Analytics 추적 ID로 교체)
 ga_code = """
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1234567890"></script>
@@ -18,13 +15,14 @@ ga_code = """
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-PZPBGNENQG');
+  gtag('config', 'G-1234567890');
 </script>
 """
 
 # Streamlit에 GA 코드 삽입
 components.html(ga_code, height=0)
 
+# 나머지 Streamlit 코드
 st.title("딥페이크 사전 방지 필터(테스트)")
 st.markdown("1. 이미지를 업로드하면, 사전 방지 필터를 씌운 이미지를 보여줍니다.    2. 하단의 흰 버튼을 누르면, 딥페이크 모델을 통해 생성된 결과를 보여줍니다.")
 st.markdown(
@@ -110,7 +108,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 
 def change_hair_to_blonde(image):
     # Convert to OpenCV format
