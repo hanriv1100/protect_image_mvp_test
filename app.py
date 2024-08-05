@@ -5,19 +5,6 @@ from PIL import Image, ExifTags
 import streamlit as st
 import streamlit.components.v1 as components
 
-ga_code = """
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'YOUR-GA-ID');
-</script>
-"""
-
-components.html(ga_code)
-
 
 st.set_page_config(page_title="딥페이크 사전 방지 필터(테스트)", layout="wide")
 st.title("딥페이크 사전 방지 필터(테스트)")
