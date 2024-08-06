@@ -211,7 +211,6 @@ if uploaded_file is not None:
     
     with col1:
         st.image(image, use_column_width=True)
-        st.markdown('<body>', unsafe_allow_html=True)
         st.markdown('<div class="custom-caption-1">업로드한 원본 이미지</div>', unsafe_allow_html=True)
 
     with col2:
@@ -252,4 +251,3 @@ if uploaded_file is not None:
         <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101461011ns.gif" /></p></noscript>
         """
         components.html(clicky_code, height=0)
-        st.markdown('</body>', unsafe_allow_html=True)
