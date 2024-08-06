@@ -37,6 +37,21 @@ st.markdown(
     """
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    /* 공통 스타일 */
+    .stFileUploader label,
+    .stRadio label,
+    .stRadio div,
+    .custom-caption-1,
+    .custom-caption-2,
+    .button-container,
+    .stButton button,
+    .survey,
+    .survey-1,
+    .survey-2,
+    .a-tag,
+    a {
+        transition: all 0.3s ease;
+    }
     .stFileUploader label {
         font-size: 20px;
         font-weight: 500;
@@ -112,6 +127,63 @@ st.markdown(
     a:hover {
         color: #FF0080;
         text-decoration: none;
+    }
+    
+    /* 스마트폰 화면 스타일 */
+    @media only screen and (max-width: 600px) {
+        .stFileUploader label,
+        .stRadio label,
+        .stButton button,
+        .survey-1 {
+            font-size: 16px;
+        }
+        .custom-caption-1,
+        .custom-caption-2 {
+            font-size: 24px;
+            padding: 0 0 20px 0;
+        }
+        .stButton button {
+            width: 100%;
+            font-size: 18px;
+        }
+    }
+    
+    /* 태블릿 화면 스타일 */
+    @media only screen and (min-width: 601px) and (max-width: 1024px) {
+        .stFileUploader label,
+        .stRadio label,
+        .stButton button,
+        .survey-1 {
+            font-size: 18px;
+        }
+        .custom-caption-1,
+        .custom-caption-2 {
+            font-size: 28px;
+            padding: 0 0 40px 0;
+        }
+        .stButton button {
+            width: 75%;
+            font-size: 20px;
+        }
+    }
+    
+    /* 데스크톱 화면 스타일 */
+    @media only screen and (min-width: 1025px) {
+        .stFileUploader label,
+        .stRadio label,
+        .stButton button,
+        .survey-1 {
+            font-size: 20px;
+        }
+        .custom-caption-1,
+        .custom-caption-2 {
+            font-size: 36px;
+            padding: 0 0 200px 0;
+        }
+        .stButton button {
+            width: 50%;
+            font-size: 25px;
+        }
     }
     </style>
     """,
