@@ -14,7 +14,7 @@ st.markdown("<span style='font-size: 18px;'>안녕하세요! 저희는 딥페이
 st.markdown("<span style='font-size: 18px;'>저희의 목표는 온라인에 게시된 개인의 사진이 악성 딥페이크 영상에 사용되지 않도록 하는 것입니다. 정식 론칭에 앞서, 여러분의 의견을 듣기 위해 간단한 테스트를 진행하고 있습니다.</span>", unsafe_allow_html=True)
 st.markdown("<span style='font-size: 18px;'>최근 SNS에 업로드된 이미지가 딥페이크에 악용되는 사례가 매일 보고되고 있습니다. 따라서 해결책을 강구하기 위해, 여러분의 소중한 의견이 필요합니다.</span>", unsafe_allow_html=True)
 st.markdown("")
-st.markdown("<span style='font-size: 18px;'>진행 과정 1. 사람 이미지를 업로드하면, 사전 방지 필터가 적용된 이미지를 보여드립니다.</span>", unsafe_allow_html=True)
+st.markdown("<span style='font-size: 18px;'>진행 과정 1. 사람 이미지를 업로드하면, 사전 방지 필터가 적용된 이미지를 보여드립니다. (여러분의 이미지는 저장되지 않습니다.)</span>", unsafe_allow_html=True)
 st.markdown("<span style='font-size: 18px;'>진행 과정 2. 딥페이크 실행 버튼을 클릭하면, 딥페이크 결과를 확인할 수 있습니다.</span>", unsafe_allow_html=True)
 st.markdown("<span style='font-size: 18px;'>여러분의 참여에 감사드립니다!</span>", unsafe_allow_html=True)
 st.markdown("<span style='font-size: 14px;'> *사전 방지 필터란: 사진에 미세한 변화를 주어 딥페이크 모델에 학습되지 못하도록 방해하는 필터.</span>", unsafe_allow_html=True)
