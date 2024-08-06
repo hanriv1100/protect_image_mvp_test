@@ -245,5 +245,11 @@ if uploaded_file is not None:
         st.markdown('<p class="survey"> 유사한 서비스를 사용해 보셨거나, 저희 기술적 원리에 관심이 있으신 분들께선 아래의 간단한 인터뷰에 참여해 주시면 진심으로 감사드리겠습니다.</p>', unsafe_allow_html=True)
         st.markdown('<p class="survey-1"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfmaI4K6JDbLT-xmRAYlVSwosmoWAPEY01onBfHtzeAbksDuA/viewform?usp=sf_link" target="_blank" class="a-tag">인터뷰로 딥페이크에 맞서기!!</a></p>', unsafe_allow_html=True)
         st.markdown('<p class="survey-2">서비스를 이용해 주셔서 감사합니다! 좋은 하루 보내세요!</p>', unsafe_allow_html=True)
-        st.markdown('<a title="Google Analytics Alternative" href="https://clicky.com/101461011"><img alt="Clicky" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a><script async data-id="101461011" src="//static.getclicky.com/js"></script>')
+        
+        # Clicky script integration using components.html
+        clicky_code = """
+        <script async data-id="101461011" src="//static.getclicky.com/js"></script>
+        <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101461011ns.gif" /></p></noscript>
+        """
+        components.html(clicky_code, height=0)
         st.markdown('</body>', unsafe_allow_html=True)
